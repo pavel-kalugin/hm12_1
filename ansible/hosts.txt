@@ -1,4 +1,0 @@
-
-[test_servers]
-ansible-client1  ansible_host=192.168.137.210  ansible_user=root
-ansible-client2  ansible_host=192.168.137.164  ansible_user=root
