@@ -1,0 +1,26 @@
+- hosts: all
+  become: yes
+
+  vars:
+   age: 1d
+   pattern: '*.log'
+   path: /var/log/installer
+
+  tasks:
+   - name: Recursively find /tmp files older than 1 days
+     find:
+       paths: '{{ path }}'
+       age: '{{ age }}'
+#       patterns: '{{ pattern }}'
+       recurse: yes
+     register: myfiles
+
+   - name: display myfiles
+     debug:
+      var: myfiles
+
+   - name: remove myfiles
+     file:
+      path: '{{ item.path }}'
+      state: absent
+     with_items: '{{ myfiles.files }}'
